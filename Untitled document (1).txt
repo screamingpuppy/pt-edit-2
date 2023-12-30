@@ -214,7 +214,7 @@ var skillData = [
         effect: (level) => level * 5,
         effectText: (level) => "+0.5\\%{} / level",
         starValue: [1000, 2, 3, 5, 7, 11],
-        starCost: new ExponentialCost(5, 1),
+        starCost: new ExponentialCost(2, 1),
     }, 
     {
         name: (amount) => "\\textsf{EX} Tachyon Maker",
@@ -258,7 +258,7 @@ var skillData = [
         info: (amount) => Localization.getUpgradeMultCustomInfo("\\rho_3\\text{ speed}", "{eff}") + ", based on the first 3 generators' levels",
         effect: (level) => 1 + (skills[0].level + skills[1].level + skills[2].level) * 0.0005 * level,
         effectText: (level) => "+" + ((skills[0].level + skills[1].level + skills[2].level) * 0.0005).toFixed(3) + " / level",
-        starValue: [1, 2, 3, 4, 5, 6],
+        starValue: [1, 20000, 3, 4, 5, 6],
         starCost: new LinearCost(225, 25),
     },
     {
@@ -266,17 +266,17 @@ var skillData = [
         info: (amount) => Localization.getUpgradeMultCustomInfo("\\boxdot\\text{ speed}", "{eff}") + ", based on the first 3 generators' levels",
         effect: (level) => 1 + (skills[0].level + skills[1].level + skills[2].level) * 0.0002 * level,
         effectText: (level) => "+" + ((skills[0].level + skills[1].level + skills[2].level) * 0.0002).toFixed(3) + " / level",
-        starValue: [1, 2, 3, 4, 5, 6],
+        starValue: [1, 2000000, 3, 4, 5, 6],
         starCost: new LinearCost(225, 25),
     },
     {
         name: (amount) => "\\textsf{SP} Booster $\\rho_3$",
         info: (amount) => Localization.getUpgradeMultCustomInfo("\\rho_3\\text{ gain}", "{eff}") + ", based on the first 3 boosters' levels",
-        maxLevel: 30,
+        maxLevel: 300000,
         effect: (level) => BigNumber.from(1 + (skills[3].level + skills[4].level + skills[5].level) * 0.0005).pow(level),
         effectText: (level) => "$\\times$" + (1 + (skills[3].level + skills[4].level + skills[5].level) * 0.0005).toFixed(3) + " / level",
-        starValue: [1, 2, 3, 4, 5, 6],
-        starCost: new LinearCost(250, 50),
+        starValue: [1, 200000, 3, 4, 5, 6],
+        starCost: new LinearCost(51, 50),
     },
     {
         name: (amount) => "\\textsf{SP} Raiser $b_3$",
@@ -699,7 +699,7 @@ var init = () => {
     }
     
     {
-        perm5 = theory.createPermanentUpgrade(7, currency3, new ExponentialCost(100, 2));
+        perm5 = theory.createPermanentUpgrade(7, currency3, new ExponentialCost(3, 2));
         perm5.getDescription = (amount) => Localization.getUpgradeMultCustomDesc("\\rho_1 \\text{ gain}", "100^{" + perm5.level + "}");
         perm5.getInfo = (amount) => Localization.getUpgradeMultCustomInfo("\\rho_1 \\text{ gain}", getPerm5(perm5.level));
         perm5.bought = (_) => { theory.invalidateSecondaryEquation(); };
@@ -712,13 +712,13 @@ var init = () => {
     }
     {
         perm7 = theory.createPermanentUpgrade(9, currency3, new ExponentialCost(10000, 10));
-        perm7.getDescription = (amount) => Localization.getUpgradeMultCustomDesc("\\text{pub. multi.}", "20^{" + perm7.level + "}");
+        perm7.getDescription = (amount) => Localization.getUpgradeMultCustomDesc("\\text{pub. multi.}", "2000^{" + perm7.level + "}");
         perm7.getInfo = (amount) => Localization.getUpgradeMultCustomInfo("\\text{publication multiplier}", getPerm7(perm7.level));
         perm7.bought = (_) => { theory.invalidateSecondaryEquation(); };
     }
     {
-        perm8 = theory.createPermanentUpgrade(10, currency3, new ExponentialCost(100000, 20));
-        perm8.getDescription = (amount) => Localization.getUpgradeMultCustomDesc("\\rho_3 \\text{ gain}", "2^{" + perm8.level + "}");
+        perm8 = theory.createPermanentUpgrade(10, currency3, new ExponentialCost(100, 20));
+        perm8.getDescription = (amount) => Localization.getUpgradeMultCustomDesc("\\rho_3 \\text{ gain}", "3000^{" + perm8.level + "}");
         perm8.getInfo = (amount) => Localization.getUpgradeMultCustomInfo("\\rho_3 \\text{ gain}", getPerm8(perm8.level));
         perm8.bought = (_) => { theory.invalidateSecondaryEquation(); };
     }
